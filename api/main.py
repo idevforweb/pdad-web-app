@@ -25,11 +25,23 @@ app.add_middleware(
 
 #  df to dict
 dict_data = pd.DataFrame(data()).to_dict()
-pprint(dict_data)
+
+
+@app.get('/date/{date}')
+async def get_data_by_date(date: str):
+    # return dict_data
+    return {"endpoint": f'get data by date {date}'}
+
+
+@app.get('/numbers/{numbers}')
+async def get_data_by_number(numbers: str):
+    # return dict_data
+    return {"endpoint": f'get data by number {numbers}'}
 
 
 @app.get('/')
 async def index():
-    return dict_data
+    # return dict_data
+    return {"endpoint": 'default'}
 
 # https://www.geeksforgeeks.org/python-filter-dictionary-values-in-heterogeneous-dictionary/
