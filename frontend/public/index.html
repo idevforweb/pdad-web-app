@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../src/output.css" rel="stylesheet" />
+
     <!-- Component scripts -->
-    <script src="./js/web-components/mycomponent.js"></script>
   </head>
   <body>
     <input
@@ -13,10 +14,9 @@
       class="input input-bordered w-full max-w-xs"
     />
 
-    <h2>Today's Date</h2>
-    The current date is: <current-date></current-date>
+    <current-date></current-date>
 
     <script></script>
-    <link href="../src/output.css" rel="stylesheet" />
+    <script type="module" src="./js/web-components/mycomponent.js"></script>
   </body>
 </html>

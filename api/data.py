@@ -5,8 +5,8 @@ from pprint import pprint
 
 def data():
     # convert csv column data to list dict and remove last row
-    with open('powerball.csv', 'r') as powerball_csv_data:
-        data = list(DictReader(powerball_csv_data))
+    with open('powerball.csv', 'r') as powerball_csv_raw:
+        data = list(DictReader(powerball_csv_raw))
         data.pop()
 
         # create helper functions

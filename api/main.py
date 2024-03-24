@@ -24,13 +24,19 @@ app.add_middleware(
 )
 
 #  df to dict
-dict_data = pd.DataFrame(data()).to_dict()
+df = pd.DataFrame(data())
+# print(df.loc[(df["Year"] == '2024') & (df["Month"] == '03')].to_dict())
 
 
 @app.get('/date/{date}')
 async def get_data_by_date(date: str):
-    # return dict_data
-    return {"endpoint": f'get data by date {date}'}
+    dataframe = df.loc[(df["Year"] == date)]
+    data_dict = dataframe.to_dict()
+    data_summary_dict = dataframe.describe().to_dict()
+    return {
+        'data': data_dict,
+        'dataSummary': data_summary_dict
+    }
 
 
 @app.get('/numbers/{numbers}')
@@ -41,7 +47,9 @@ async def get_data_by_number(numbers: str):
 
 @app.get('/')
 async def index():
-    # return dict_data
-    return {"endpoint": 'default'}
+    return {}
 
 # https://www.geeksforgeeks.org/python-filter-dictionary-values-in-heterogeneous-dictionary/
+
+
+# https://stackoverflow.com/questions/16476924/how-can-i-iterate-over-rows-in-a-pandas-dataframe

@@ -14,7 +14,10 @@ class ApiClass {
 
   getDataByDate(date) {
     const url = `http://127.0.0.1:8000/date/${date}`;
-    this.api(url).then((d) => console.log(d.endpoint));
+    this.api(url).then((d) => {
+      // console.log(d);
+      return d;
+    });
   }
 
   getDataByNumbers(numbers) {
@@ -24,6 +27,7 @@ class ApiClass {
 }
 
 const t = new ApiClass();
-t.getDefaultData();
-t.getDataByDate(2024);
-t.getDataByNumbers(10);
+
+t.getDataByDate(2024).then();
+// t.getDataByDate(2021);
+// t.getDataByDate(2008);
