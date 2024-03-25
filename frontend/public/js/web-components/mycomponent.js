@@ -28,11 +28,32 @@ class DataTable extends HTMLElement {
     this[property] = newValue;
 
     const url = `http://127.0.0.1:8000/date/${this.date}`;
-    this.api(url).then((d) => {
-      console.log(this.date);
-      console.log(d);
-      this.textContent = `${d}`;
-    });
+
+    this.api(url)
+
+      .then((data) => {
+        if (data[0].Month.length == 0) {
+          this.innerHTML = `
+          <div class="wrong-input">
+            There is no date matching ${this.date}, please try again.
+          </div>`;
+
+          return;
+        }
+
+        this.innerHTML = `
+        <div class="grid-container">
+          <div class="col-name col-${Object.keys(data[0])}">
+            ${Object.keys(data[0])}
+          </div>
+          ${data[0].Month.map((number) => `<div class="item">${number}</div>`).join('')}
+        </div>
+        `;
+      })
+
+      .catch((error) => {
+        this.innerHTML = `An error has occured.`;
+      });
   }
 
   // This function is called when the Web Component is appended to a Document Object Model. It should run any required rendering.

@@ -13,7 +13,6 @@ app = FastAPI()
 origins = [
     "http://127.0.0.1:3000",
     'http://127.0.0.1:5500',
-    # 'http://127.0.0.1:5500/frontend/public/index.html'
 ]
 
 app.add_middleware(
@@ -32,12 +31,17 @@ df = pd.DataFrame(data())
 @app.get('/date/{date}')
 async def get_data_by_date(date: str):
     dataframe = df.loc[(df["Year"] == date)]
+
     data_dict = dataframe.to_dict()
     data_summary_dict = dataframe.describe().to_dict()
-    return {
-        'data': data_dict,
-        'dataSummary': data_summary_dict
-    }
+
+    t = [{x: list(data_dict[x].values())} for x in data_dict]
+    print(t)
+    # return {
+    #     'data': data_dict,
+    #     'dataSummary': data_summary_dict
+    # }
+    return t
 
 
 @app.get('/numbers/{numbers}')

@@ -29,3 +29,6 @@ def data():
             'Power Play': column_data('Power Play'),
             # 'Jackpot': [x.split('.')[0] for x in column_data("Jackpot")],
         }
+
+
+print([['Year'][x] for x in data() if x == "2024"])

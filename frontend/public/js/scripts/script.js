@@ -1,3 +1,5 @@
+'use-strict';
+
 const input = document.getElementById('inp');
 
 inp.addEventListener('change', () => {
