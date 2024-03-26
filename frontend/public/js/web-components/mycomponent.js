@@ -32,22 +32,31 @@ class DataTable extends HTMLElement {
     this.api(url)
 
       .then((data) => {
+        function gridContainer(colName, index) {
+          return `
+        <div class="grid-container">
+          <div class="col-name col-${Object.keys(data[0])}">
+            ${colName}
+          </div>
+            ${data[index][colName].map((number) => `<div class="item">${number}</div>`).join('')}
+        </div>`;
+        }
+
         if (data[0].Month.length == 0) {
           this.innerHTML = `
           <div class="wrong-input">
             There is no date matching ${this.date}, please try again.
           </div>`;
-
           return;
         }
 
         this.innerHTML = `
-        <div class="grid-container">
-          <div class="col-name col-${Object.keys(data[0])}">
-            ${Object.keys(data[0])}
-          </div>
-          ${data[0].Month.map((number) => `<div class="item">${number}</div>`).join('')}
-        </div>
+          ${gridContainer('Month', 0)}
+          ${gridContainer('Day', 1)}
+          ${gridContainer('Year', 2)}
+          ${gridContainer('Number 1', 3)}
+        
+        
         `;
       })
 
